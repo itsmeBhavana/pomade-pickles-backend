@@ -22,10 +22,18 @@ const users = [
 
 const app = express();
 app.use(
-  cors({
-    origin: ORIGIN_PORT,
-    credentials: true,
-  })
+  cors(
+    cors({
+      origin: function (origin, callback) {
+        if (ORIGIN_PORT.includes(origin) || !origin) {
+          callback(null, true);
+        } else {
+          callback(new Error("Not allowed by CORS"));
+        }
+      },
+      credentials: true, // Allow cookies or other credentials
+    })
+  )
 );
 app.use(express.json());
 app.use(express.text());
