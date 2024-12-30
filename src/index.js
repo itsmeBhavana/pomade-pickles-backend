@@ -1,13 +1,17 @@
 import express from "express";
-import { EMAIL, ORIGIN_PORT, PASSWORD, PORT } from "./config/serverConfig.js";
+import {
+  EMAIL,
+  ORIGIN_PORT,
+  PASSWORD,
+  PORT,
+  SECRET_KEY,
+} from "./config/serverConfig.js";
 import apiRouter from "./routers/index.js";
 import connectDB from "./config/dbConfig.js";
 import cors from "cors";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import { authenticateToken } from "./middlewares/middleware.js";
-
-const SECRET_KEY = "your_secret_key";
 
 const users = [
   {
